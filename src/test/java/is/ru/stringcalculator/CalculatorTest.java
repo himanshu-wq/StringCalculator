@@ -21,9 +21,25 @@ public class CalculatorTest {
     public void testThreeNumbers(){
     	assertEquals(6, Calculator.add("1,2,3"));
     }
-
     @Test
     public void testNewLine(){
     	assertEquals(6, Calculator.add("1\n2,3"));
+    }
+
+    @Test
+    public void testNegativeNumver(){
+    	try {
+			Calculator.add("-1,2");
+		}
+		catch (IllegalArgumentException e){
+			assertEquals(e.getMessage(), "Negatives not allowed: -1");
+		}
+
+		try {
+			Calculator.add("2,-4,3,-5");
+		}
+		catch (IllegalArgumentException e){
+			assertEquals(e.getMessage(), "Negatives not allowed: -4,-5");
+		}
     }
 } 
