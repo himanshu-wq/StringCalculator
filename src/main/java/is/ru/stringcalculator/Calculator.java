@@ -5,8 +5,6 @@ public class Calculator {
 			return 0;
 		}
 		else{
-			text.replaceAll("\n", ",")
-			String numList[] = splitNumbers(text, ",");
 			String numList[] = splitNumbers(text, ",|\n");
 			return sum(numList);
 		}
@@ -17,11 +15,25 @@ public class Calculator {
 	private static String[] splitNumbers(String numbers, String divider){
 	    return numbers.split(divider);
 	}
+
 	private static int sum(String[] numbers){
  	    int total = 0;
+ 	    String negString = "";
+
         for(String number : numbers){
+        	if(toInt(number) < 0){
+        		if(negString.equals(""))
+        			negString = number;
+        		else
+        			negString += ("," + number);
+        	}
 		    total += toInt(number);
 		}
+
+		if(!negString.equals("")){
+			throw new IllegalArgumentException("Negatives not allowed: " + negString);
+		}
+
 		return total;
     }
 }
