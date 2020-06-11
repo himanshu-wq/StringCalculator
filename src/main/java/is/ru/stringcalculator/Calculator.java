@@ -6,6 +6,13 @@ public class Calculator {
 		}
 		else{
 			String numList[] = splitNumbers(text, ",|\n");
+			String delimiter = ",";
+			if(text.matches("//(.*)\n(.*)")){
+				delimiter = Character.toString(text.charAt(2));
+				text = text.substring(4);
+			}
+
+			String numList[] = splitNumbers(text, delimiter + "|\n");
 			return sum(numList);
 		}
 	}
@@ -25,16 +32,12 @@ public class Calculator {
         		else
         			negString += ("," + number);
         	}
-		    total += toInt(number);
         	if(toInt(number) < 1000)
 		    	total += toInt(number);
 		}
-
 		if(!negString.equals("")){
 			throw new IllegalArgumentException("Negatives not allowed: " + negString);
 		}
-		
-
 		return total;
     }
-} 
+}
