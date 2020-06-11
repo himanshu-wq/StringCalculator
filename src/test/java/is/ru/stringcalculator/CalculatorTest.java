@@ -25,7 +25,6 @@ public class CalculatorTest {
     public void testNewLine(){
     	assertEquals(6, Calculator.add("1\n2,3"));
     }
-
     @Test
     public void testNegativeNumver(){
     	try {
@@ -34,7 +33,6 @@ public class CalculatorTest {
 		catch (IllegalArgumentException e){
 			assertEquals(e.getMessage(), "Negatives not allowed: -1");
 		}
-
 		try {
 			Calculator.add("2,-4,3,-5");
 		}
@@ -42,4 +40,9 @@ public class CalculatorTest {
 			assertEquals(e.getMessage(), "Negatives not allowed: -4,-5");
 		}
     }
-} 
+
+    @Test
+    public void testOverThousand(){
+    	assertEquals(2, Calculator.add("1000,2"));
+    }
+}
